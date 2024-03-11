@@ -31,7 +31,7 @@ jobs:
       with:
         push: true
         tags: greentechseegreentaxi.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_5114bc25463e46dd858b33f2c15aac56 }}/greentaxi:${{ github.sha }}
-        file: ./Dockerfile
+        file: ./Web/Dockerfile
 
   deploy:
     runs-on: ubuntu-latest
