@@ -17,7 +17,7 @@ jobs:
     - uses: actions/checkout@v2
 
     - name: Set up Docker Buildx
-      uses: docker/setup-buildx-action@v2
+      uses: docker/setup-buildx-action@v3
 
     - name: Log in to registry
       uses: docker/login-action@v2
@@ -27,11 +27,11 @@ jobs:
         password: ${{ secrets.AzureAppService_ContainerPassword_8938781979cc4ac68dd86b8054f34a42 }}
 
     - name: Build and push container image to registry
-      uses: docker/build-push-action@v3
+      uses: docker/build-push-action@v5
       with:
         push: true
         tags: greentechseegreentaxi.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_5114bc25463e46dd858b33f2c15aac56 }}/greentaxi:${{ github.sha }}
-        context: Web
+        context: "{{defaultContext}}:Web"
         file: ./Dockerfile
 
   deploy:
