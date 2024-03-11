@@ -1,0 +1,19 @@
+/****** Object:  Table [dbo].[Person]    Script Date: 11.03.2024 17:15:04 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[Person](
+	[Fnr] [nvarchar](20) NOT NULL,
+	[Name] [nvarchar](1000) NOT NULL,
+	[Email] [nvarchar](1000) NOT NULL,
+ CONSTRAINT [PK_Person] PRIMARY KEY CLUSTERED 
+(
+	[Fnr] ASC
+)WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+
