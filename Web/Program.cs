@@ -15,11 +15,16 @@ var configuration = builder.Configuration;
 
 // Add services to the container.
 
-services.AddControllers();
-services.AddRazorPages().AddRazorRuntimeCompilation();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-services.AddEndpointsApiExplorer();
-services.AddSwaggerGen();
+services.AddCors();
+services.AddControllers()
+	.AddRazorRuntimeCompilation();
+services.AddRazorPages()
+	.AddRazorRuntimeCompilation();
+
+services.AddOpenApiDocument(configure => configure.PostProcess = openApiDocument =>
+{
+	openApiDocument.Info.Title = "GreenTaxi";
+});
 
 services.AddAuthentication(sharedOptions =>
 {
@@ -111,8 +116,9 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-	app.UseSwagger();
-	app.UseSwaggerUI();
+	app.UseOpenApi();
+	app.UseSwaggerUi();
+	app.UseReDoc();
 }
 
 app.UseHsts();
