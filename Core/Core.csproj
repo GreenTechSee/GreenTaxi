@@ -17,9 +17,4 @@
 		<PackageReference Include="oledid.SyntaxImprovement" Version="0.12.1-beta" />
 	</ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Core\Entities\" />
-    <Folder Include="Core\Repositories\" />
-  </ItemGroup>
-
 </Project>

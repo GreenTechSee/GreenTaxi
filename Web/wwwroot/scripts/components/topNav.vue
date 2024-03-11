@@ -1,11 +1,13 @@
 <template>
 	<div class="d-flex w-100">
-		<div>Logo her</div><h1>Status - 
+		<div class="me-3">Logo her</div>
+		<h1>Status - 
 			<span v-if="status == 0">Laster</span>
 			<span v-if="status == 1">Normal</span>
 			<span v-if="status == 2">Risikabel</span>
 			<span v-if="status == 3">Kritisk</span>
 		</h1>
+		
 	</div>
 </template>
 

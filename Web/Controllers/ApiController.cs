@@ -9,5 +9,6 @@ namespace Web.Controllers
 	[Route("/Secure/[controller]/[action]")]
 	public class ApiController
 	{
+		
 	}
 }
