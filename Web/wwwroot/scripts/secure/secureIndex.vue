@@ -1,6 +1,6 @@
 <template>
-	Hello secure
+	<topNav></topNav>
 </template>
 <script lang="ts" setup>
-	console.log("Hello, world!");
+	import topNav from "../components/topNav.vue";
 </script>
