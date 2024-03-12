@@ -1,0 +1,101 @@
+// @ts-nocheck // trenger ikke typecheck i testene
+
+import { mount, flushPromises } from "@vue/test-utils";
+import { test, expect } from "vitest";
+import BottomNav from "@/scripts/components/bottomNav.vue";
+
+test("mount bottomNav - VARSEL", async () => {
+
+	//////////////////////////////////////////////////////////////////////
+	// mocking av data
+
+	//////////////////////////////////////////////////////////////////////
+	// mount komponenten
+
+	const wrapper = mount(BottomNav, {
+	});
+
+	//////////////////////////////////////////////////////////////////////
+	// vent på at mounting blir ferdig
+	await flushPromises();
+
+	//////////////////////////////////////////////////////////////////////
+	// her kommer testene
+
+	// bruk denne ved skriving av flere tester
+	// console.log(wrapper.html());
+
+	expect(wrapper.find(".container-fluid a:nth-child(1)").text()).toBe(`VARSEL`);
+});
+
+test("mount bottomNav - MITT HJEM", async () => {
+
+	//////////////////////////////////////////////////////////////////////
+	// mocking av data
+
+	//////////////////////////////////////////////////////////////////////
+	// mount komponenten
+
+	const wrapper = mount(BottomNav, {
+	});
+
+	//////////////////////////////////////////////////////////////////////
+	// vent på at mounting blir ferdig
+	await flushPromises();
+
+	//////////////////////////////////////////////////////////////////////
+	// her kommer testene
+
+	// bruk denne ved skriving av flere tester
+	// console.log(wrapper.html());
+
+	expect(wrapper.find(".container-fluid a:nth-child(2)").text()).toBe(`MITT HJEM`);
+});
+
+test("mount bottomNav - KART", async () => {
+
+	//////////////////////////////////////////////////////////////////////
+	// mocking av data
+
+	//////////////////////////////////////////////////////////////////////
+	// mount komponenten
+
+	const wrapper = mount(BottomNav, {
+	});
+
+	//////////////////////////////////////////////////////////////////////
+	// vent på at mounting blir ferdig
+	await flushPromises();
+
+	//////////////////////////////////////////////////////////////////////
+	// her kommer testene
+
+	// bruk denne ved skriving av flere tester
+	// console.log(wrapper.html());
+
+	expect(wrapper.find(".container-fluid a:nth-child(3)").text()).toBe(`KART`);
+});
+
+test("mount bottomNav - VEILEDNING", async () => {
+
+	//////////////////////////////////////////////////////////////////////
+	// mocking av data
+
+	//////////////////////////////////////////////////////////////////////
+	// mount komponenten
+
+	const wrapper = mount(BottomNav, {
+	});
+
+	//////////////////////////////////////////////////////////////////////
+	// vent på at mounting blir ferdig
+	await flushPromises();
+
+	//////////////////////////////////////////////////////////////////////
+	// her kommer testene
+
+	// bruk denne ved skriving av flere tester
+	// console.log(wrapper.html());
+
+	expect(wrapper.find(".container-fluid a:nth-child(4)").text()).toBe(`VEILEDNING`);
+});
