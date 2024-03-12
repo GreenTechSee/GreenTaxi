@@ -25,6 +25,7 @@ services.AddOpenApiDocument(configure => configure.PostProcess = openApiDocument
 {
 	openApiDocument.Info.Title = "GreenTaxi";
 });
+Dependencies.AddDependencies(services);
 
 services.AddAuthentication(sharedOptions =>
 {
