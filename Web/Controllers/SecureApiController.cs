@@ -79,4 +79,9 @@ public class SecureApiController : ControllerBase
 
 		return await statusRepository.GetActiveStatus(connection);
 	}
+
+	public async Task<string> GetAzureMapsKey()
+	{
+		return configuration["Secrets:AzureMapsKey"] ?? string.Empty;
+	}
 }
