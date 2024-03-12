@@ -1,6 +1,6 @@
 using oledid.SyntaxImprovement.Generators.Sql;
 
-namespace Core.Core.Entities;
+namespace Core.Core.Entities.HomeBeredskap;
 
 public class HomeEntity
 {

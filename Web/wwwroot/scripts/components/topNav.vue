@@ -7,7 +7,7 @@
 			<span v-if="status == 2">Risikabel</span>
 			<span v-if="status == 3">Kritisk</span>
 		</h1>
-		
+
 	</div>
 </template>
 
@@ -19,13 +19,24 @@ const status = ref(0);
 
 onMounted(async () => {
 	try {
-	const api = new SecureApiClient("");
+		const api = new SecureApiClient("");
 
-	const fnr = await api.getLoggedInFnr();
-	console.log(`Hello, ${fnr}!`);
-	status.value = 1;
+		const fnr = await api.getLoggedInFnr();
+		console.log(`Hello, ${fnr}!`);
+		status.value = 1;
+		const statusString = sessionStorage.getItem("topnav::status");
+		if (statusString) {
+			status.value = JSON.parse(statusString);
+		}
+
+		const statusId = await api.getStatusId();
+
+		if (!statusString || status.value !== statusId) {
+			status.value = statusId;
+			sessionStorage.setItem("topnav::status", JSON.stringify(statusId));
+		}
 	}
- catch (err) {
+	catch (err) {
 		console.error(err);
 	}
 
