@@ -71,16 +71,19 @@ onMounted(async () => {
 			}
 		});
 
-		myHome.itemTypes?.forEach(e => {
-			if (myHome.items && myHome.items.filter(e => e.itemTypeId === e.id).length < e.recomendedUnitPerPerson! * myHome.numberOfInhabitants!) {
-				alerts.value.push({
-					date: date, 
-					text: "Din hustand har ikke registrert nok " + e.name + ". Vi anbefaler at din hustand har minst " + e.recomendedUnitPerPerson + " " + e.unit, 
-					type: "alert-warning",
-					icon: "fa-bell"
-				});
-			}
-		});
+		if (myHome.hasLackingItems && myHome.numberOfMissingTypes && myHome.numberOfMissingTypes === 1) {
+			myHome.itemTypes?.forEach(e => {
+				if (myHome.items && myHome.items.filter(e => e.itemTypeId === e.id).length < e.recomendedUnitPerPerson! * myHome.numberOfInhabitants!) {
+					alerts.value.push({
+						date: date, 
+						text: "Din hustand har ikke registrert nok " + e.name + ". Vi anbefaler at din hustand har minst " + e.recomendedUnitPerPerson + " " + e.unit, 
+						type: "alert-warning",
+						icon: "fa-bell"
+					});
+				}
+			});
+		}
+		
 	}
 
 });
