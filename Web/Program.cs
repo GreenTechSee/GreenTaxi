@@ -1,4 +1,5 @@
 using Core;
+using Core.Concepts.AppDatabase.Repositories;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.StaticFiles;
@@ -75,6 +76,9 @@ services.AddAuthentication(sharedOptions =>
 				context.Fail("Must authenticate with idporten-loa-high");
 				return;
 			}
+
+			var personRepository = context.HttpContext.RequestServices.GetService<IPersonRepository>()!;
+			await personRepository.UpsertPerson(fodselsnummer);
 
 			claimsIdentity.SetClaim(AppClaims.IdTokenHint, context.TokenEndpointResponse?.IdToken ?? throw new NullReferenceException($"{nameof(context)}.{nameof(context.TokenEndpointResponse)}.{nameof(context.TokenEndpointResponse.IdToken)}"));
 			claimsIdentity.SetClaim(AppClaims.AuthenticationType, AppAuthenticationSchemes.IdPorten);

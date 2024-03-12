@@ -3,7 +3,7 @@ using oledid.SyntaxImprovement.Generators.Sql;
 
 namespace Core.Core.Entities.HomeBeredskap;
 
-internal class ItemEntity : DatabaseTable
+public class ItemEntity : DatabaseTable
 {
 	public override string GetTableName() => nameof(ItemEntity).RemoveFromEnd("Entity");
 
