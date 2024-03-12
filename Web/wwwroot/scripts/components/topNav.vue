@@ -8,8 +8,8 @@
 				<img src="/images/Logo uten status.png" height="50px" v-if="status.statusId == 0" alt="Safe Haven">
 				<div></div>
 			</a>
-			<button class="navbar-toggler" style="border: none;" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-				<img src="/images/Asset 6.png" height="50px">
+			<button class="navbar-toggler" style="border: none;" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Meny">
+				<img src="/images/Asset 6.png" height="50px" alt="Profil bilde">
 			</button>
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
 				<span></span>

@@ -1,19 +1,19 @@
 <template>
 	<nav class="navbar navbar-expand fixed-bottom bg-body-tertiary">
 		<div class="container-fluid justify-content-around mx-3">
-			<a class="btn" href="#/alerts" :style="isItemActive('alerts') ? 'color: #1D424D;' : 'color: #387f93;'">
+			<a class="btn" href="#/alerts" :style="isItemActive('alerts') ? 'color: #1D424D;' : 'color: #1c667a;'">
 				<i class="fa-bell" :class="isItemActive('alerts') ? 'fa-solid': 'fa-light'"></i><br>
 				VARSEL
 			</a>
-			<a class="btn" href="#/myHome" :style="isItemActive('myhome') ? 'color: #1D424D;' : 'color: #387f93;'">
+			<a class="btn" href="#/myHome" :style="isItemActive('myhome') ? 'color: #1D424D;' : 'color: #1c667a;'">
 				<i class="fa-home" :class="isItemActive('myHome') ? 'fa-solid': 'fa-light'"></i><br>
 				MITT HJEM
 			</a>
-			<a class="btn" href="#/map" :style="isItemActive('map') ? 'color: #1D424D;' : 'color: #387f93;'">
+			<a class="btn" href="#/map" :style="isItemActive('map') ? 'color: #1D424D;' : 'color: #1c667a;'">
 				<i class="fa-map" :class="isItemActive('map') ? 'fa-solid': 'fa-light'"></i><br>
 				KART
 			</a>
-			<a class="btn" href="#/help" :style="isItemActive('help') ? 'color: #1D424D;' : 'color: #387f93;'">
+			<a class="btn" href="#/help" :style="isItemActive('help') ? 'color: #1D424D;' : 'color: #1c667a;'">
 				<i class="fa-info" :class="isItemActive('help') ? 'fa-solid': 'fa-light'"></i><br>
 				INFO
 			</a>
