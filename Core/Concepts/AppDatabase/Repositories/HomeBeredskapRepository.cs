@@ -1,7 +1,6 @@
-using Core.Concepts.AppDatabase.Repositories;
 using Microsoft.Extensions.Configuration;
 
-namespace Core.Core.Repositories;
+namespace Core.Concepts.AppDatabase.Repositories;
 
 public interface IHomeBeredskapRepository
 {
@@ -14,5 +13,5 @@ public class HomeBeredskapRepository : AppDatabaseRepository, IHomeBeredskapRepo
 	{
 	}
 
-	
+
 }

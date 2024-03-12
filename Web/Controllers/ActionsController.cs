@@ -2,7 +2,6 @@
 
 using Core;
 using Core.Concepts.AppDatabase.Repositories;
-using Core.Core.Repositories;
 using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using NSwag;

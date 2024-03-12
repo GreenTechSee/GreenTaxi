@@ -1,11 +1,10 @@
-using Core.Concepts.AppDatabase.Repositories;
 using Core.Core.Entities;
 using Dapper;
 using Microsoft.Extensions.Configuration;
 using oledid.SyntaxImprovement.Generators.Sql;
 using System.Data.Common;
 
-namespace Core.Core.Repositories;
+namespace Core.Concepts.AppDatabase.Repositories;
 
 public interface IStatusRepository
 {
@@ -17,7 +16,7 @@ public interface IStatusRepository
 
 public class StatusRepository : AppDatabaseRepository, IStatusRepository
 {
-	public StatusRepository(IConfiguration configuration) : base(configuration) {}
+	public StatusRepository(IConfiguration configuration) : base(configuration) { }
 
 	public async Task<Status> GetActiveStatus(DbConnection connection)
 	{

@@ -1,4 +1,3 @@
-using Core.Concepts.AppDatabase.Repositories;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
@@ -6,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Core.Core.Repositories;
+namespace Core.Concepts.AppDatabase.Repositories;
 
-public interface IPersonRepository 
+public interface IPersonRepository
 {
 }
 
