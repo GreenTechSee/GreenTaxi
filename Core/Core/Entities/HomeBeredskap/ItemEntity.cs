@@ -1,7 +1,7 @@
 using oledid.SyntaxImprovement;
 using oledid.SyntaxImprovement.Generators.Sql;
 
-namespace Core.Core.Entities;
+namespace Core.Core.Entities.HomeBeredskap;
 
 internal class ItemEntity : DatabaseTable
 {

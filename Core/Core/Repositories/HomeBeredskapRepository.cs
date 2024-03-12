@@ -3,9 +3,16 @@ using Microsoft.Extensions.Configuration;
 
 namespace Core.Core.Repositories;
 
-public class HomeBeredskapRepository : AppDatabaseRepository
+public interface IHomeBeredskapRepository
+{
+}
+
+
+public class HomeBeredskapRepository : AppDatabaseRepository, IHomeBeredskapRepository
 {
 	public HomeBeredskapRepository(IConfiguration configuration) : base(configuration)
 	{
 	}
+
+	
 }
