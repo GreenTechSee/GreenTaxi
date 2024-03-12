@@ -1,6 +1,8 @@
 
 
 using Core;
+using Core.Concepts.AppDatabase.Repositories;
+using Core.Core.Repositories;
 using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using NSwag;
@@ -16,10 +18,12 @@ namespace Web.Controllers
 	public class ActionsController : ControllerBase
 	{
 		private readonly IConfiguration configuration;
+		private readonly IStatusRepository statusRepository;
 
-		public ActionsController(IConfiguration configuration)
+		public ActionsController(IConfiguration configuration, IStatusRepository adminRepository)
 		{
 			this.configuration = configuration;
+			this.statusRepository = adminRepository;
 		}
 
 		public async Task<IActionResult> ThrowError()
@@ -55,16 +59,22 @@ namespace Web.Controllers
 
 		public async Task<IActionResult> SetStatusToNormal()
 		{
+			await using var connection = await AppDatabaseRepository.OpenConnectionAsync(configuration);
+			await statusRepository.SetActiveStatus(connection, 1);
 			return Content("OK", "text/plain");
 		}
 
 		public async Task<IActionResult> SetStatusToWarning()
 		{
+			await using var connection = await AppDatabaseRepository.OpenConnectionAsync(configuration);
+			await statusRepository.SetActiveStatus(connection, 2);
 			return Content("OK", "text/plain");
 		}
 
 		public async Task<IActionResult> SetStatusToDanger()
 		{
+			await using var connection = await AppDatabaseRepository.OpenConnectionAsync(configuration);
+			await statusRepository.SetActiveStatus(connection, 3);
 			return Content("OK", "text/plain");
 		}
 

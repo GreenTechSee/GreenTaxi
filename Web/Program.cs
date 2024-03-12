@@ -16,10 +16,10 @@ var configuration = builder.Configuration;
 // Add services to the container.
 
 services.AddCors();
-services.AddControllers()
-	.AddRazorRuntimeCompilation();
-services.AddRazorPages()
-	.AddRazorRuntimeCompilation();
+services.AddControllers();
+	//.AddRazorRuntimeCompilation();
+services.AddRazorPages();
+	//.AddRazorRuntimeCompilation();
 
 services.AddOpenApiDocument(configure => configure.PostProcess = openApiDocument =>
 {
