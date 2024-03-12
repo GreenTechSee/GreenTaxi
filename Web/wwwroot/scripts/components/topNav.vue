@@ -1,11 +1,11 @@
 <template>
 	<nav class="navbar navbar-collapse bg-body-tertiary" data-bs-theme="dark">
 		<div class="container-fluid">
-			<a class="navbar-brand" href="#">
+			<a class="navbar-brand" href="#" @click.prevent="">
 				<img src="/images/Logo -lav.png" height="50px">
 			</a>
 			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-				<img src="/images/Logo -lav.png" height="50px">
+				<img src="/images/Asset 6.png" height="50px">
 			</button>
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
 				<span></span>
