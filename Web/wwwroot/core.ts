@@ -4,3 +4,4 @@ import "whatwg-fetch"; // <- fetch polyfill
 import "@/styles/custom-bootstrap.scss";
 import "@/styles/libs.less";
 import "@/styles/styles.less";
+import "bootstrap/dist/js/bootstrap.bundle.min.js";

@@ -1,14 +1,25 @@
 <template>
-	<div class="d-flex w-100">
-		<div class="me-3">Logo her</div>
-		<h1>Status - 
-			<span v-if="status == 0">Laster</span>
-			<span v-if="status == 1">Normal</span>
-			<span v-if="status == 2">Risikabel</span>
-			<span v-if="status == 3">Kritisk</span>
-		</h1>
-
-	</div>
+	<nav class="navbar navbar-collapse bg-body-tertiary" data-bs-theme="dark">
+		<div class="container-fluid">
+			<a class="navbar-brand" href="#">
+				<img src="/images/Logo -lav.png" height="50px">
+			</a>
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+				<img src="/images/Logo -lav.png" height="50px">
+			</button>
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<span></span>
+				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+					<li class="nav-item">
+						<a class="nav-link" href="#" @click.prevent=""><i class="fa-solid fa-user"></i> Min profil</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="/Access/Logout"><i class="fa-solid fa-sign-out"></i> Logg ut</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</nav>
 </template>
 
 <script setup lang="ts">
@@ -29,12 +40,12 @@ onMounted(async () => {
 			status.value = JSON.parse(statusString);
 		}
 
-		const statusId = await api.getStatusId();
+		// const statusId = await api.getStatusId();
 
-		if (!statusString || status.value !== statusId) {
-			status.value = statusId;
-			sessionStorage.setItem("topnav::status", JSON.stringify(statusId));
-		}
+		// if (!statusString || status.value !== statusId) {
+		// 	status.value = statusId;
+		// 	sessionStorage.setItem("topnav::status", JSON.stringify(statusId));
+		// }
 	}
 	catch (err) {
 		console.error(err);
