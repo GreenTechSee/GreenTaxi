@@ -1,11 +1,11 @@
 <template>
 	<nav class="navbar navbar-collapse bg-body-tertiary border-bottom" :style="getStyle()">
 		<div class="container-fluid">
-			<a class="navbar-brand" href="#" @click.prevent="">
-				<img src="/images/Logo -lav.png" height="50px" v-if="status.statusId == 1">
-				<img src="/images/Logo moderat.png" height="50px" v-if="status.statusId == 2">
-				<img src="/images/Logo kritisk.png" height="50px" v-if="status.statusId == 3">
-				<img src="/images/Logo uten status.png" height="50px" v-if="status.statusId == 0">
+			<a class="navbar-brand" href="#" @click.prevent="" aria-label="Tilbake til start">
+				<img src="/images/Logo -lav.png" height="50px" v-if="status.statusId == 1" alt="Safe Haven">
+				<img src="/images/Logo moderat.png" height="50px" v-if="status.statusId == 2" alt="Safe Haven">
+				<img src="/images/Logo kritisk.png" height="50px" v-if="status.statusId == 3" alt="Safe Haven">
+				<img src="/images/Logo uten status.png" height="50px" v-if="status.statusId == 0" alt="Safe Haven">
 				<div></div>
 			</a>
 			<button class="navbar-toggler" style="border: none;" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
