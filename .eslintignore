@@ -1,3 +1,4 @@
 .eslintrc.cjs
 Web/wwwroot/libs
 Web/obj
+Web/wwwroot/dist
