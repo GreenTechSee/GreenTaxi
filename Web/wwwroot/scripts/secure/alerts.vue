@@ -64,7 +64,7 @@ onMounted(async () => {
 			if (e.sellByDate && e.sellByDate < today && e.sellByDate > new Date()) {
 				alerts.value.push({
 					date: date, 
-					text: e.itemType?.name + " går snart ut på dato ut på dato. På tide å bytte ut.", 
+					text: e.itemType?.name + " går snart ut på dato ut. På tide å bytte ut.", 
 					type: "alert-info",
 					icon: "fa-cookie-bite"
 				});
