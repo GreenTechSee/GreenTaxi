@@ -477,6 +477,40 @@ export class SecureApiClient {
         }
         return Promise.resolve<ItemEntity[]>(null as any);
     }
+
+    getStatus(): Promise<Status> {
+        let url_ = this.baseUrl + "/Secure/SecureApi/GetStatus";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_: RequestInit = {
+            method: "GET",
+            headers: {
+                "Accept": "application/json"
+            }
+        };
+
+        return this.http.fetch(url_, options_).then((_response: Response) => {
+            return this.processGetStatus(_response);
+        });
+    }
+
+    protected processGetStatus(response: Response): Promise<Status> {
+        const status = response.status;
+        let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
+        if (status === 200) {
+            return response.text().then((_responseText) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = Status.fromJS(resultData200);
+            return result200;
+            });
+        } else if (status !== 200 && status !== 204) {
+            return response.text().then((_responseText) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            });
+        }
+        return Promise.resolve<Status>(null as any);
+    }
 }
 
 export class WeatherForecastClient {
@@ -686,6 +720,7 @@ export class ItemTypeEntity extends DatabaseTable implements IItemTypeEntity {
     name?: string;
     recomendedUnitPerPerson?: number;
     unit?: string;
+    excludeFromTotal?: boolean;
 
     constructor(data?: IItemTypeEntity) {
         super(data);
@@ -704,6 +739,7 @@ export class ItemTypeEntity extends DatabaseTable implements IItemTypeEntity {
             this.name = _data["name"];
             this.recomendedUnitPerPerson = _data["recomendedUnitPerPerson"];
             this.unit = _data["unit"];
+            this.excludeFromTotal = _data["excludeFromTotal"];
         }
     }
 
@@ -720,6 +756,7 @@ export class ItemTypeEntity extends DatabaseTable implements IItemTypeEntity {
         data["name"] = this.name;
         data["recomendedUnitPerPerson"] = this.recomendedUnitPerPerson;
         data["unit"] = this.unit;
+        data["excludeFromTotal"] = this.excludeFromTotal;
         super.toJSON(data);
         return data;
     }
@@ -730,6 +767,58 @@ export interface IItemTypeEntity extends IDatabaseTable {
     name?: string;
     recomendedUnitPerPerson?: number;
     unit?: string;
+    excludeFromTotal?: boolean;
+}
+
+export class Status extends DatabaseTable implements IStatus {
+    statusId?: number;
+    isActive?: boolean;
+    name?: string;
+    description?: string | undefined;
+
+    constructor(data?: IStatus) {
+        super(data);
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        super.init(_data);
+        if (_data) {
+            this.statusId = _data["statusId"];
+            this.isActive = _data["isActive"];
+            this.name = _data["name"];
+            this.description = _data["description"];
+        }
+    }
+
+    static fromJS(data: any): Status {
+        data = typeof data === 'object' ? data : {};
+        let result = new Status();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["statusId"] = this.statusId;
+        data["isActive"] = this.isActive;
+        data["name"] = this.name;
+        data["description"] = this.description;
+        super.toJSON(data);
+        return data;
+    }
+}
+
+export interface IStatus extends IDatabaseTable {
+    statusId?: number;
+    isActive?: boolean;
+    name?: string;
+    description?: string | undefined;
 }
 
 export class WeatherForecast implements IWeatherForecast {

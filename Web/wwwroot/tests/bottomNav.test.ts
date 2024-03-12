@@ -76,7 +76,7 @@ test("mount bottomNav - KART", async () => {
 	expect(wrapper.find(".container-fluid a:nth-child(3)").text()).toBe(`KART`);
 });
 
-test("mount bottomNav - VEILEDNING", async () => {
+test("mount bottomNav - INFO", async () => {
 
 	//////////////////////////////////////////////////////////////////////
 	// mocking av data
@@ -97,5 +97,5 @@ test("mount bottomNav - VEILEDNING", async () => {
 	// bruk denne ved skriving av flere tester
 	// console.log(wrapper.html());
 
-	expect(wrapper.find(".container-fluid a:nth-child(4)").text()).toBe(`VEILEDNING`);
+	expect(wrapper.find(".container-fluid a:nth-child(4)").text()).toBe(`INFO`);
 });

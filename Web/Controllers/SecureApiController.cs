@@ -1,5 +1,6 @@
 using Core;
 using Core.Concepts.AppDatabase.Repositories;
+using Core.Core.Entities;
 using Core.Core.Entities.HomeBeredskap;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -14,11 +15,13 @@ public class SecureApiController : ControllerBase
 {
 	private readonly IConfiguration configuration;
 	private readonly IHomeBeredskapRepository homeBeredskapRepository;
+	private readonly IStatusRepository statusRepository;
 
-	public SecureApiController(IConfiguration configuration, IHomeBeredskapRepository homeBeredskapRepository)
+	public SecureApiController(IConfiguration configuration, IHomeBeredskapRepository homeBeredskapRepository, IStatusRepository statusRepository)
 	{
 		this.configuration = configuration;
 		this.homeBeredskapRepository = homeBeredskapRepository;
+		this.statusRepository = statusRepository;
 	}
 
 	public async Task<string> GetLoggedInFnr()
@@ -68,5 +71,12 @@ public class SecureApiController : ControllerBase
 		await using var connection = await AppDatabaseRepository.OpenConnectionAsync(configuration);
 
 		return await homeBeredskapRepository.GetItems(connection, homeId);
+	}
+
+	public async Task<Status> GetStatus()
+	{
+		await using var connection = await AppDatabaseRepository.OpenConnectionAsync(configuration);
+
+		return await statusRepository.GetActiveStatus(connection);
 	}
 }

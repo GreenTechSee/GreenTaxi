@@ -18,8 +18,8 @@
 		"test:watch": "vitest",
 		"build-only": "vite build",
 		"copy-font-awesome": "run-script-os",
-		"copy-font-awesome:win32": "robocopy /MIR /njh /njs /ndl /nc /ns .\\node_modules\\@fortawesome\\fontawesome-free .\\Web\\wwwroot\\libs\\font-awesome  /XD *\"sprites\" *\"svgs\" || echo .",
-		"copy-font-awesome:nix": "mkdir -p ./Web/wwwroot/libs/font-awesome/ && rsync -a --exclude=*\"sprites\" --exclude=*\"svgs\" ./node_modules/@fortawesome/fontawesome-free/ ./Web/wwwroot/libs/font-awesome/  || echo ."
+		"copy-font-awesome:win32": "robocopy /MIR /njh /njs /ndl /nc /ns .\\node_modules\\@fortawesome\\fontawesome-pro .\\Web\\wwwroot\\libs\\font-awesome  /XD *\"sprites\" *\"svgs\" || echo .",
+		"copy-font-awesome:nix": "mkdir -p ./Web/wwwroot/libs/font-awesome/ && rsync -a --exclude=*\"sprites\" --exclude=*\"svgs\" ./node_modules/@fortawesome/fontawesome-pro/ ./Web/wwwroot/libs/font-awesome/  || echo ."
 	},
 	"repository": {
 		"type": "git",
@@ -32,7 +32,7 @@
 	},
 	"homepage": "https://github.com/Kristiansund-kommune/GreenTechSee-Team-GreenTaxi-2024#readme",
 	"dependencies": {
-		"@fortawesome/fontawesome-free": "^6.5.1",
+		"@fortawesome/fontawesome-pro": "^6.5.1",
 		"@popperjs/core": "^2.11.8",
 		"bluebird": "^3.7.2",
 		"bootstrap": "^5.3.3",
