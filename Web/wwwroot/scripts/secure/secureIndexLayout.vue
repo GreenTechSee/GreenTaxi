@@ -1,6 +1,6 @@
 <template>
 	<top-nav></top-nav>
-	<div class="container-fluid mt-3 mb-5">
+	<div class="container-fluid mt-3 mb-5 pb-5">
 		<router-view></router-view>
 	</div>
 	<bottom-nav></bottom-nav>
