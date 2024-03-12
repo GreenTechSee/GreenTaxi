@@ -41,5 +41,6 @@ public class StatusRepository : AppDatabaseRepository, IStatusRepository
 		var update = new Update<Status>().Set(e => e.IsActive, false).Where(e => e.IsActive == true).ToQuery();
 		await connection.ExecuteAsync(update.QueryText, update.Parameters);
 		var update2 = new Update<Status>().Set(e => e.IsActive, true).Where(e => e.StatusId == id).ToQuery();
+		await connection.ExecuteAsync(update2.QueryText, update2.Parameters);
 	}
 }
