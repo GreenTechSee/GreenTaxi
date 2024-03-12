@@ -600,6 +600,9 @@ export class HomeEntity extends DatabaseTable implements IHomeEntity {
     adress?: string;
     numberOfInhabitants?: number;
     items?: ItemEntity[];
+    itemTypes?: ItemTypeEntity[] | undefined;
+    hasLackingItems?: boolean;
+    numberOfMissingTypes?: number;
 
     constructor(data?: IHomeEntity) {
         super(data);
@@ -624,6 +627,13 @@ export class HomeEntity extends DatabaseTable implements IHomeEntity {
                 for (let item of _data["items"])
                     this.items!.push(ItemEntity.fromJS(item));
             }
+            if (Array.isArray(_data["itemTypes"])) {
+                this.itemTypes = [] as any;
+                for (let item of _data["itemTypes"])
+                    this.itemTypes!.push(ItemTypeEntity.fromJS(item));
+            }
+            this.hasLackingItems = _data["hasLackingItems"];
+            this.numberOfMissingTypes = _data["numberOfMissingTypes"];
         }
     }
 
@@ -646,6 +656,13 @@ export class HomeEntity extends DatabaseTable implements IHomeEntity {
             for (let item of this.items)
                 data["items"].push(item.toJSON());
         }
+        if (Array.isArray(this.itemTypes)) {
+            data["itemTypes"] = [];
+            for (let item of this.itemTypes)
+                data["itemTypes"].push(item.toJSON());
+        }
+        data["hasLackingItems"] = this.hasLackingItems;
+        data["numberOfMissingTypes"] = this.numberOfMissingTypes;
         super.toJSON(data);
         return data;
     }
@@ -658,6 +675,9 @@ export interface IHomeEntity extends IDatabaseTable {
     adress?: string;
     numberOfInhabitants?: number;
     items?: ItemEntity[];
+    itemTypes?: ItemTypeEntity[] | undefined;
+    hasLackingItems?: boolean;
+    numberOfMissingTypes?: number;
 }
 
 export class ItemEntity extends DatabaseTable implements IItemEntity {

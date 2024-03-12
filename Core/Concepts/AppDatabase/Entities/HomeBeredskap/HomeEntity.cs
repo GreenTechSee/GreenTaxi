@@ -13,8 +13,64 @@ public class HomeEntity : DatabaseTable
 	public string PersonFnr { get; set; } = string.Empty;
 	public string Name { get; set; } = string.Empty;
 	public string Adress { get; set; } = string.Empty;
-	public int numberOfInhabitants { get; set; }
+	public int NumberOfInhabitants { get; set; }
 
 	[Ignore]
 	public List<ItemEntity> Items { get; set; } = new List<ItemEntity>();
+
+	[Ignore]
+	public List<ItemTypeEntity>? ItemTypes { get; set; }
+
+	[Ignore]
+	public bool HasLackingItems { get
+		{
+			var itemsGrouped = Items.GroupBy(e => e.ItemTypeId).ToDictionary(e => e.Key, e => e.ToList());
+			if (ItemTypes == null) return false;
+
+			foreach (var type in ItemTypes)
+			{
+				var items = itemsGrouped.GetValueOrNull(type.Id);
+
+				if (items == null)
+				{
+					return true;
+				}
+
+				if (type.ExcludeFromTotal == false && items.Count < type.RecomendedUnitPerPerson * NumberOfInhabitants)
+				{
+					return true;
+				}
+			}
+
+			return false;
+		}
+	}
+
+	[Ignore]
+	public int NumberOfMissingTypes
+	{
+		get
+		{
+			var itemsGrouped = Items.GroupBy(e => e.ItemTypeId).ToDictionary(e => e.Key, e => e.ToList());
+			if (ItemTypes == null) return 0;
+
+			var i = 0;
+			foreach (var type in ItemTypes)
+			{
+				var items = itemsGrouped.GetValueOrNull(type.Id);
+
+				if (items == null)
+				{
+					i++;
+				}
+
+				else if (type.ExcludeFromTotal == false && items.Count < type.RecomendedUnitPerPerson * NumberOfInhabitants)
+				{
+					i++;
+				}
+			}
+
+			return i;
+		}
+	}
 }

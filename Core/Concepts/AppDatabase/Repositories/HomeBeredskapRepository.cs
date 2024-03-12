@@ -39,7 +39,7 @@ public class HomeBeredskapRepository : AppDatabaseRepository, IHomeBeredskapRepo
 			Name = "Mitt hjem",
 			Adress = "",
 			PersonFnr = fnr,
-			numberOfInhabitants = numberOfInhabitants
+			NumberOfInhabitants = numberOfInhabitants
 		};
 
 		var insert = new Insert<HomeEntity>().Add(newHome).ToQuery();
@@ -64,6 +64,7 @@ public class HomeBeredskapRepository : AppDatabaseRepository, IHomeBeredskapRepo
 		if (home != null)
 		{
 			home.Items = await GetItems(connection, home.Id);
+			home.ItemTypes = await GetItemTypes(connection);
 		}
 
 		return home;
