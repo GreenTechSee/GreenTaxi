@@ -31,9 +31,6 @@ const status = ref(0);
 onMounted(async () => {
 	try {
 		const api = new SecureApiClient("");
-
-		const fnr = await api.getLoggedInFnr();
-		console.log(`Hello, ${fnr}!`);
 		status.value = 1;
 		const statusString = sessionStorage.getItem("topnav::status");
 		if (statusString) {
