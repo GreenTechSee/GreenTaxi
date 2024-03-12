@@ -1,6 +1,8 @@
 <template>
 	<top-nav></top-nav>
-	<router-view></router-view>
+	<div class="container-fluid mt-3 mb-5">
+		<router-view></router-view>
+	</div>
 	<bottom-nav></bottom-nav>
 </template>
 <script lang="ts" setup>

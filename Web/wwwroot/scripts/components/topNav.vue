@@ -11,7 +11,7 @@
 				<span></span>
 				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 					<li class="nav-item">
-						<a class="nav-link" href="#" @click.prevent=""><i class="fa-solid fa-user"></i> Min profil</a>
+						<a class="nav-link" href="#/myProfile" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"><i class="fa-solid fa-user"></i> Min profil</a>
 					</li>
 					<li class="nav-item">
 						<a class="nav-link" href="/Access/Logout"><i class="fa-solid fa-sign-out"></i> Logg ut</a>
