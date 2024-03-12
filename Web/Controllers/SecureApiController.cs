@@ -2,9 +2,7 @@ using Core;
 using Core.Concepts.AppDatabase.Repositories;
 using Core.Core.Entities;
 using Core.Core.Entities.HomeBeredskap;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Data.Common;
 
 namespace Web.Controllers;
 
