@@ -15,16 +15,16 @@
 										<img :src="'../../images/BeredskapspakkeImg/'+ itemType.id+'.jpeg'" :alt="itemType.name" style="height: 100px; width: 100px;"> 
 										<div class="my-auto ms-3">
 											<h3 class="text-break">{{ itemType.name }}</h3>
-											<p class="">{{ myHome.items?.filter(e => e.itemTypeId == itemType.id).length ?? 0 }} / {{ itemType.recomendedUnitPerPerson! * myHome.numberOfInhabitants! }} {{ itemType.unit }}</p>
+											<p class="">{{ getNumberOfUnits(itemType.id ?? 0) }} / {{ getRecomendedAmount(itemType) }} {{ itemType.unit }}</p>
 										</div>
 									</div>
 								</button>
 							</div>
 							<div :id="'collapse' + itemType.id" class="accordion-collapse collapse bg-light" :aria-labelledby="'heading' + itemType.id" data-bs-parent="#accordionExample">
 								<div class="accordion-body p-3">
-									<div v-for="item, index in myHome.items?.filter(e => e.itemTypeId == itemType.id)" :key="item.id">
+									<div v-for="item in myHome.items?.filter(e => e.itemTypeId == itemType.id)" :key="item.id">
 										<div v-if="item.id !== 0" class="d-flex border rounded w-100 p-2 mb-3 bg-white">
-											<span class="my-auto">{{ itemType.unit }} {{ index + 1 }} - Utløpsdato {{ moment(item.sellByDate).utc(true).local().format("DD.MM.YYYY") }}</span>
+											<span class="my-auto">{{ item.numberOfUnits + " " + itemType.unit }} {{ item.sellByDate ? "- Utløpsdato" + moment(item.sellByDate).utc(true).local().format("DD.MM.YYYY") : "" }}</span>
 											<button type="button" class="btn btn-danger ms-auto" @click="removeItem(item.id!)" aria-label="Slett">
 												<i class="fa-solid fa-trash"></i>
 											</button>
@@ -74,12 +74,46 @@ async function addHome() {
 	myHome.value = await api.getHome();
 }
 
+function getNumberOfUnits(itemTypeId: number) {
+	const items = myHome.value?.items?.filter(e => e.itemTypeId === itemTypeId);
+	if (!items) {
+		return 0;
+	}
+
+	let count = 0;
+	items.forEach(item => {
+		count += item.numberOfUnits ?? 1;
+	});
+
+	return count;
+}
+
+function getRecomendedAmount(itemType?: ItemTypeEntity) {
+	if (!itemType) {
+		return 0;
+	}
+	if (itemType.excludeFromTotal) {
+		return itemType.recomendedUnitPerPerson;
+	}
+
+	return itemType.recomendedUnitPerPerson! * myHome.value!.numberOfInhabitants!;
+}
+
 async function addItem(itemTypeId: number) {
-	const date = prompt("Utløpsdato (YYYY.MM.DD)?");
+	const n = prompt("Hvor mange vil du legge til med samme utløpsdato?");
+	const date = prompt("Valgfritt legg in utløpsdato (YYYY.MM.DD):");
+
 	const item = new ItemEntity({
 		itemTypeId: itemTypeId,
 		homeId: myHome.value?.id,
+		numberOfUnits: 1
 	});
+
+	const numberOfUnits = Number(n);
+	if (numberOfUnits > 0) {
+		item.numberOfUnits = numberOfUnits;
+	}
+
 	if (date !== "") {
 		const dateDate = moment(date).toDate();
 		dateDate.setHours(5);

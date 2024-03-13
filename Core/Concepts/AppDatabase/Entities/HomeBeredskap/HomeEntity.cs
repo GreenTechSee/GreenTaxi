@@ -36,9 +36,17 @@ public class HomeEntity : DatabaseTable
 					return true;
 				}
 
-				if (type.ExcludeFromTotal == false && items.Count < type.RecomendedUnitPerPerson * NumberOfInhabitants)
+				if (type.ExcludeFromTotal == false)
 				{
-					return true;
+					var count = 0;
+					foreach (var item in Items)
+					{
+						count += item.NumberOfUnits;
+					}
+					if (count < (type.RecomendedUnitPerPerson * NumberOfInhabitants))
+					{
+						return true;
+					}
 				}
 			}
 
@@ -66,11 +74,54 @@ public class HomeEntity : DatabaseTable
 
 				else if (type.ExcludeFromTotal == false && items.Count < type.RecomendedUnitPerPerson * NumberOfInhabitants)
 				{
-					i++;
+					var count = 0;
+					foreach (var item in Items)
+					{
+						count += item.NumberOfUnits;
+					}
+					if (count < (type.RecomendedUnitPerPerson * NumberOfInhabitants))
+					{
+						i++;
+					}
 				}
 			}
 
 			return i;
+		}
+	}
+
+	[Ignore]
+	public ItemTypeEntity? firstMissingItemType
+	{
+		get
+		{
+			var itemsGrouped = Items.GroupBy(e => e.ItemTypeId).ToDictionary(e => e.Key, e => e.ToList());
+			if (ItemTypes == null) return null;
+
+			foreach (var type in ItemTypes)
+			{
+				var items = itemsGrouped.GetValueOrNull(type.Id);
+
+				if (items == null)
+				{
+					return type;
+				}
+
+				if (type.ExcludeFromTotal == false)
+				{
+					var count = 0;
+					foreach (var item in Items)
+					{
+						count += item.NumberOfUnits;
+					}
+					if (count < (type.RecomendedUnitPerPerson * NumberOfInhabitants))
+					{
+						return type;
+					}
+				}
+			}
+
+			return null;
 		}
 	}
 }
