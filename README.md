@@ -2,6 +2,8 @@
 
 <img src="logo.png" style="max-width: 300px" />
 
+DEMO: https://greentaxi.azurewebsites.net/
+
 <h1>Om GreenTaxi</h1>
 
 ![GreenTaxi](https://github.com/Kristiansund-kommune/GreenTechSee-Team-GreenTaxi-2024/assets/28563616/25a85b9d-6e15-4390-9f89-d66bcb0de24b)
