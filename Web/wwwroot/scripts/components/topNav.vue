@@ -1,5 +1,5 @@
 <template>
-	<nav class="navbar navbar-collapse bg-body-tertiary border-bottom" :style="getStyle()">
+	<nav class="navbar navbar-collapse bg-body-tertiary border-bottom sticky-top" :style="getStyle()">
 		<div class="container-fluid">
 			<a class="navbar-brand" href="#" @click.prevent="" aria-label="Tilbake til start">
 				<img src="/images/Logo -lav.png" height="50px" v-if="status.statusId == 1" alt="Safe Haven">
