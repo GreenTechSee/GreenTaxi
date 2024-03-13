@@ -2,6 +2,8 @@
 
 <img src="logo.png" style="max-width: 300px" />
 
+DEMO: https://greentaxi.azurewebsites.net/
+
 <h1>Om GreenTaxi</h1>
 
 ![GreenTaxi](https://github.com/Kristiansund-kommune/GreenTechSee-Team-GreenTaxi-2024/assets/28563616/25a85b9d-6e15-4390-9f89-d66bcb0de24b)
@@ -11,7 +13,7 @@
 <p>Hege er Head of UX i Team GreenTaxi, hun har også full kontroll på teamet gjennom rollen sin som teamlead, hun elsker Balsamico og hater ostepop</p>
 
 <h2>Ole Morten Didriksen</h2>
-<p>Ole Morten er Head of development i Team GreenTaxi, han elsker CSS og hater smånisser som folk har i hagen.</p>
+<p>Ole Morten er Head of development i Team GreenTaxi, han elsker CSS og hater smånisser som har folk i hagen.</p>
 
 <h2>Alida Hjelljord</h2>
 <p>Alida er Head of integrations i Team GreenTaxi, hun elsker gamle episoder av Jepardy på TV2 og hater klissete bokser når hun panter</p>
