@@ -85,6 +85,6 @@ public class SecureApiController : ControllerBase
 
 	public async Task<bool> IsEasterEggActivated()
 	{
-		return User.FindFirst(AppClaims.EasterEgg)?.Value == "true";
+		return User.FindFirst(AppClaims.EasterEgg)?.Value?.ToLowerInvariant() == "true";
 	}
 }
