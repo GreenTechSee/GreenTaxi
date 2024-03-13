@@ -25,7 +25,7 @@
 					<li class="nav-item" v-if="isLoggedIn">
 						<a class="nav-link" href="/Access/Logout"><i class="fa-solid fa-sign-out"></i> Logg ut</a>
 					</li>
-					<li class="nav-item">
+					<li class="nav-item" v-else>
 						<a href="/Access/Login" class="nav-link"><i class="fa-solid fa-sign-in"></i> Logg inn</a>
 					</li>
 				</ul>
