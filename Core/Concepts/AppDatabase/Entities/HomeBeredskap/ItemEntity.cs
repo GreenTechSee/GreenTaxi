@@ -12,7 +12,7 @@ public class ItemEntity : DatabaseTable
 	public long Id { get; set; }
 	public long ItemTypeId { get; set; }
 	public long HomeId { get; set; }
-	public DateTime SellByDate { get; set; }
+	public DateTime? SellByDate { get; set; }
 
 	[Ignore]
 	public ItemTypeEntity? ItemType { get; set; }
