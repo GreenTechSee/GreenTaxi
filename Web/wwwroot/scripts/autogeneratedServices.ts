@@ -273,7 +273,7 @@ export class GptClient {
             let result200: any = null;
             let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
                 result200 = resultData200 !== undefined ? resultData200 : <any>null;
-
+    
             return result200;
             });
         } else if (status !== 200 && status !== 204) {
@@ -606,7 +606,7 @@ export class SecureApiClient {
             let result200: any = null;
             let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
                 result200 = resultData200 !== undefined ? resultData200 : <any>null;
-
+    
             return result200;
             });
         } else if (status !== 200 && status !== 204) {
@@ -645,7 +645,7 @@ export class SecureApiClient {
             let result200: any = null;
             let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
                 result200 = resultData200 !== undefined ? resultData200 : <any>null;
-
+    
             return result200;
             });
         } else if (status !== 200 && status !== 204) {
@@ -816,6 +816,7 @@ export class ItemEntity extends DatabaseTable implements IItemEntity {
     id?: number;
     itemTypeId?: number;
     homeId?: number;
+    numberOfUnits?: number;
     sellByDate?: Date | undefined;
     itemType?: ItemTypeEntity | undefined;
 
@@ -865,6 +866,7 @@ export interface IItemEntity extends IDatabaseTable {
     id?: number;
     itemTypeId?: number;
     homeId?: number;
+    numberOfUnits?: number;
     sellByDate?: Date | undefined;
     itemType?: ItemTypeEntity | undefined;
 }
