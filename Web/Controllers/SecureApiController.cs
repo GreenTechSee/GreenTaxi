@@ -22,11 +22,18 @@ public class SecureApiController : ControllerBase
 		this.statusRepository = statusRepository;
 	}
 
-	public async Task<string> GetLoggedInFnr()
+	private async Task<string> GetLoggedInFnr()
 	{
 		return User.FindFirst(AppClaims.Fnr)?.Value ?? "";
 	}
 
+	/// <summary>
+	/// Adds a home to the logged in user
+	/// </summary>
+	/// <param name="numberOfInhabitants">
+	/// Number of people living in the home
+	/// </param>
+	/// <returns></returns>
 	public async Task AddHome(int numberOfInhabitants)
 	{
 		var fnr = await GetLoggedInFnr();
@@ -35,6 +42,12 @@ public class SecureApiController : ControllerBase
 		await homeBeredskapRepository.AddHome(connection, fnr, numberOfInhabitants);
 	}
 
+	/// <summary>
+	/// Gets the home of the logged in user
+	/// </summary>
+	/// <returns cref="HomeEntity">
+	/// Home registered to current user
+	/// </returns>
 	public async Task<HomeEntity?> GetHome()
 	{
 		var fnr = await GetLoggedInFnr();
@@ -43,6 +56,13 @@ public class SecureApiController : ControllerBase
 		return await homeBeredskapRepository.GetHome(connection, fnr);
 	}
 
+	/// <summary>
+	/// Adds an item to a home
+	/// </summary>
+	/// <param name="item" cref="ItemEntity">
+	/// ItemEntity to add
+	/// </param>
+	/// <returns></returns>
 	public async Task AddItem(ItemEntity item)
 	{
 		await using var connection = await AppDatabaseRepository.OpenConnectionAsync(configuration);
@@ -50,6 +70,13 @@ public class SecureApiController : ControllerBase
 		await homeBeredskapRepository.AddItem(connection, item);
 	}
 
+	/// <summary>
+	/// Removes item from home
+	/// </summary>
+	/// <param name="itemId">
+	/// Id of the item to remove
+	/// </param>
+	/// <returns></returns>
 	public async Task RemoveItem(long itemId)
 	{
 		await using var connection = await AppDatabaseRepository.OpenConnectionAsync(configuration);
@@ -57,6 +84,12 @@ public class SecureApiController : ControllerBase
 		await homeBeredskapRepository.RemoveItem(connection, itemId);
 	}
 
+	/// <summary>
+	/// Gets all itemTypes
+	/// </summary>
+	/// <returns cref="ItemTypeEntity">
+	/// All itemTypes in DB
+	/// </returns>
 	public async Task<List<ItemTypeEntity>> GetItemTypes()
 	{
 		await using var connection = await AppDatabaseRepository.OpenConnectionAsync(configuration);
@@ -64,6 +97,15 @@ public class SecureApiController : ControllerBase
 		return await homeBeredskapRepository.GetItemTypes(connection);
 	}
 
+	/// <summary>
+	/// Get items in a home
+	/// </summary>
+	/// <param name="homeId">
+	/// Id of home to get for
+	/// </param>
+	/// <returns cref="ItemEntity">
+	/// List of items
+	/// </returns>
 	public async Task<List<ItemEntity>> GetItems(long homeId)
 	{
 		await using var connection = await AppDatabaseRepository.OpenConnectionAsync(configuration);
@@ -71,6 +113,10 @@ public class SecureApiController : ControllerBase
 		return await homeBeredskapRepository.GetItems(connection, homeId);
 	}
 
+	/// <summary>
+	/// Gets the status of the application
+	/// </summary>
+	/// <returns></returns>
 	public async Task<Status> GetStatus()
 	{
 		await using var connection = await AppDatabaseRepository.OpenConnectionAsync(configuration);
@@ -78,11 +124,21 @@ public class SecureApiController : ControllerBase
 		return await statusRepository.GetActiveStatus(connection);
 	}
 
+	/// <summary>
+	/// Gets the AzureMapsKey 
+	/// </summary>
+	/// <returns></returns>
 	public async Task<string> GetAzureMapsKey()
 	{
 		return configuration["Secrets:AzureMapsKey"] ?? string.Empty;
 	}
 
+	/// <summary>
+	/// Checks if user is the user with easter egg profile
+	/// </summary>
+	/// <returns>
+	/// True if user has correct fnr, else false
+	/// </returns>
 	public async Task<bool> IsEasterEggActivated()
 	{
 		return User.FindFirst(AppClaims.EasterEgg)?.Value?.ToLowerInvariant() == "true";

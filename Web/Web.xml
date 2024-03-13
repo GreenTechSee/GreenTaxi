@@ -1,0 +1,149 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Web</name>
+    </assembly>
+    <members>
+        <member name="M:Web.Controllers.AccessController.Logout(System.String)">
+            <summary>
+            Logs the user out of the application and reroutes to returnUrl
+            </summary>
+            <param name="returnUrl">
+            Url to login page
+            </param>
+            <returns>
+            Redirect to Url
+            </returns>
+        </member>
+        <member name="M:Web.Controllers.AccessController.Login">
+            <summary>
+            Logs the user into the aplication
+            </summary>
+            <returns>
+            Redirect to secure main page
+            </returns>
+        </member>
+        <member name="M:Web.Controllers.ActionsController.ThrowError">
+            <summary>
+            Debug API:
+            Throw an error
+            </summary>
+            <exception cref="T:System.Exception">
+            This method always trows an error for debuging
+            </exception>
+        </member>
+        <member name="M:Web.Controllers.ActionsController.GenerateTsFromSwagger">
+            <summary>
+            Dev API:
+            Generates typescript fetch methods from controller classes
+            </summary>
+            <returns cref="T:Microsoft.AspNetCore.Mvc.IActionResult">
+            Returns Ok result if method runs without error
+            </returns>
+            <exception cref="T:System.NotSupportedException">
+            Throws error if run in prod
+            </exception>
+        </member>
+        <member name="M:Web.Controllers.ActionsController.SetStatusToNormal">
+            <summary>
+            Debug API:
+            Simulates admin module by setting danger level to normal
+            </summary>
+            <returns>
+            Returns Ok result if method runs without error
+            </returns>
+        </member>
+        <member name="M:Web.Controllers.ActionsController.SetStatusToWarning">
+            <summary>
+            Debug API:
+            Simulates admin module by setting danger level to warning
+            </summary>
+            <returns>
+            Returns Ok result if method runs without error
+            </returns>
+        </member>
+        <member name="M:Web.Controllers.ActionsController.SetStatusToDanger">
+            <summary>
+            Debug API:
+            Simulates admin module by setting danger level to danger
+            </summary>
+            <returns>
+            Returns Ok result if method runs without error
+            </returns>
+        </member>
+        <member name="M:Web.Controllers.SecureApiController.AddHome(System.Int32)">
+            <summary>
+            Adds a home to the logged in user
+            </summary>
+            <param name="numberOfInhabitants">
+            Number of people living in the home
+            </param>
+            <returns></returns>
+        </member>
+        <member name="M:Web.Controllers.SecureApiController.GetHome">
+            <summary>
+            Gets the home of the logged in user
+            </summary>
+            <returns cref="T:Core.Core.Entities.HomeBeredskap.HomeEntity">
+            Home registered to current user
+            </returns>
+        </member>
+        <member name="M:Web.Controllers.SecureApiController.AddItem(Core.Core.Entities.HomeBeredskap.ItemEntity)">
+            <summary>
+            Adds an item to a home
+            </summary>
+            <param name="item" cref="T:Core.Core.Entities.HomeBeredskap.ItemEntity">
+            ItemEntity to add
+            </param>
+            <returns></returns>
+        </member>
+        <member name="M:Web.Controllers.SecureApiController.RemoveItem(System.Int64)">
+            <summary>
+            Removes item from home
+            </summary>
+            <param name="itemId">
+            Id of the item to remove
+            </param>
+            <returns></returns>
+        </member>
+        <member name="M:Web.Controllers.SecureApiController.GetItemTypes">
+            <summary>
+            Gets all itemTypes
+            </summary>
+            <returns cref="T:Core.Core.Entities.HomeBeredskap.ItemTypeEntity">
+            All itemTypes in DB
+            </returns>
+        </member>
+        <member name="M:Web.Controllers.SecureApiController.GetItems(System.Int64)">
+            <summary>
+            Get items in a home
+            </summary>
+            <param name="homeId">
+            Id of home to get for
+            </param>
+            <returns cref="T:Core.Core.Entities.HomeBeredskap.ItemEntity">
+            List of items
+            </returns>
+        </member>
+        <member name="M:Web.Controllers.SecureApiController.GetStatus">
+            <summary>
+            Gets the status of the application
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Web.Controllers.SecureApiController.GetAzureMapsKey">
+            <summary>
+            Gets the AzureMapsKey 
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Web.Controllers.SecureApiController.IsEasterEggActivated">
+            <summary>
+            Checks if user is the user with easter egg profile
+            </summary>
+            <returns>
+            True if user has correct fnr, else false
+            </returns>
+        </member>
+    </members>
+</doc>

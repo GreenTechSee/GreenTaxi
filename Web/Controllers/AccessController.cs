@@ -10,6 +10,15 @@ namespace Web.Controllers;
 [ResponseCache(NoStore = true, Location = ResponseCacheLocation.None)]
 public class AccessController : ControllerBase
 {
+	/// <summary>
+	/// Logs the user out of the application and reroutes to returnUrl
+	/// </summary>
+	/// <param name="returnUrl">
+	/// Url to login page
+	/// </param>
+	/// <returns>
+	/// Redirect to Url
+	/// </returns>
 	[AllowAnonymous]
 	public async Task<IActionResult> Logout(string? returnUrl = null)
 	{
@@ -28,6 +37,12 @@ public class AccessController : ControllerBase
 		return Redirect("~/");
 	}
 
+	/// <summary>
+	/// Logs the user into the aplication
+	/// </summary>
+	/// <returns>
+	/// Redirect to secure main page
+	/// </returns>
 	[AllowAnonymous]
 	public async Task<IActionResult> Login()
 	{
