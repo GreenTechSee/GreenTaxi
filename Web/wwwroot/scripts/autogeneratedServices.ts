@@ -17,7 +17,7 @@ export class ActionsClient {
 
     constructor(baseUrl?: string, http?: { fetch(url: RequestInfo, init?: RequestInit): Promise<Response> }) {
         this.http = http ? http : window as any;
-        this.baseUrl = baseUrl ?? "https://localhost:5001";
+        this.baseUrl = baseUrl ?? "http://localhost:8080";
     }
 
     /**
@@ -242,7 +242,7 @@ export class GptClient {
 
     constructor(baseUrl?: string, http?: { fetch(url: RequestInfo, init?: RequestInit): Promise<Response> }) {
         this.http = http ? http : window as any;
-        this.baseUrl = baseUrl ?? "https://localhost:5001";
+        this.baseUrl = baseUrl ?? "http://localhost:8080";
     }
 
     generateResult(input: GptEntity): Promise<string> {
@@ -273,7 +273,7 @@ export class GptClient {
             let result200: any = null;
             let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
                 result200 = resultData200 !== undefined ? resultData200 : <any>null;
-    
+
             return result200;
             });
         } else if (status !== 200 && status !== 204) {
@@ -292,7 +292,7 @@ export class SecureApiClient {
 
     constructor(baseUrl?: string, http?: { fetch(url: RequestInfo, init?: RequestInit): Promise<Response> }) {
         this.http = http ? http : window as any;
-        this.baseUrl = baseUrl ?? "https://localhost:5001";
+        this.baseUrl = baseUrl ?? "http://localhost:8080";
     }
 
     /**
@@ -606,7 +606,7 @@ export class SecureApiClient {
             let result200: any = null;
             let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
                 result200 = resultData200 !== undefined ? resultData200 : <any>null;
-    
+
             return result200;
             });
         } else if (status !== 200 && status !== 204) {
@@ -645,7 +645,7 @@ export class SecureApiClient {
             let result200: any = null;
             let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
                 result200 = resultData200 !== undefined ? resultData200 : <any>null;
-    
+
             return result200;
             });
         } else if (status !== 200 && status !== 204) {
@@ -816,7 +816,6 @@ export class ItemEntity extends DatabaseTable implements IItemEntity {
     id?: number;
     itemTypeId?: number;
     homeId?: number;
-    numberOfUnits?: number;
     sellByDate?: Date | undefined;
     itemType?: ItemTypeEntity | undefined;
 
@@ -866,7 +865,6 @@ export interface IItemEntity extends IDatabaseTable {
     id?: number;
     itemTypeId?: number;
     homeId?: number;
-    numberOfUnits?: number;
     sellByDate?: Date | undefined;
     itemType?: ItemTypeEntity | undefined;
 }
