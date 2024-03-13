@@ -6,6 +6,8 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 		<UserSecretsId>8c87ac5e-bc6e-480f-8915-dadbd9e6331e</UserSecretsId>
 		<DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+		<GenerateDocumentationFile>True</GenerateDocumentationFile>
+		<DocumentationFile>Web.xml</DocumentationFile>
 	</PropertyGroup>
 
 	<Import Project="../Common.targets" />

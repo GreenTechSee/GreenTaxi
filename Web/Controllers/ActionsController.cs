@@ -2,6 +2,7 @@
 
 using Core;
 using Core.Concepts.AppDatabase.Repositories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using NSwag;
@@ -12,6 +13,7 @@ using Web.Code;
 namespace Web.Controllers
 {
 	[ApiController]
+	[AllowAnonymous]
 	[ResponseCache(NoStore = true, Location = ResponseCacheLocation.None)]
 	[Route("/Secure/[controller]/[action]")]
 	public class ActionsController : ControllerBase
@@ -25,11 +27,28 @@ namespace Web.Controllers
 			this.statusRepository = adminRepository;
 		}
 
+		/// <summary>
+		/// Debug API:
+		/// Throw an error
+		/// </summary>
+		/// <exception cref="Exception">
+		/// This method always trows an error for debuging
+		/// </exception>
 		public async Task<IActionResult> ThrowError()
 		{
 			throw new Exception("Dette er en test-feilmelding");
 		}
 
+		/// <summary>
+		/// Dev API:
+		/// Generates typescript fetch methods from controller classes
+		/// </summary>
+		/// <returns cref="IActionResult">
+		/// Returns Ok result if method runs without error
+		/// </returns>
+		/// <exception cref="NotSupportedException">
+		/// Throws error if run in prod
+		/// </exception>
 		public async Task<IActionResult> GenerateTsFromSwagger()
 		{
 			if (HttpContext.Request.GetDisplayUrl().ToLowerInvariant().StartsWith("https://local.paakobla.no") == false)
@@ -56,6 +75,13 @@ namespace Web.Controllers
 			return Content("OK", "text/plain");
 		}
 
+		/// <summary>
+		/// Debug API:
+		/// Simulates admin module by setting danger level to normal
+		/// </summary>
+		/// <returns>
+		/// Returns Ok result if method runs without error
+		/// </returns>
 		public async Task<IActionResult> SetStatusToNormal()
 		{
 			await using var connection = await AppDatabaseRepository.OpenConnectionAsync(configuration);
@@ -63,6 +89,13 @@ namespace Web.Controllers
 			return Content("OK", "text/plain");
 		}
 
+		/// <summary>
+		/// Debug API:
+		/// Simulates admin module by setting danger level to warning
+		/// </summary>
+		/// <returns>
+		/// Returns Ok result if method runs without error
+		/// </returns>
 		public async Task<IActionResult> SetStatusToWarning()
 		{
 			await using var connection = await AppDatabaseRepository.OpenConnectionAsync(configuration);
@@ -70,6 +103,13 @@ namespace Web.Controllers
 			return Content("OK", "text/plain");
 		}
 
+		/// <summary>
+		/// Debug API:
+		/// Simulates admin module by setting danger level to danger
+		/// </summary>
+		/// <returns>
+		/// Returns Ok result if method runs without error
+		/// </returns>
 		public async Task<IActionResult> SetStatusToDanger()
 		{
 			await using var connection = await AppDatabaseRepository.OpenConnectionAsync(configuration);
