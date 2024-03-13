@@ -78,7 +78,7 @@ async function initMap() {
 		});
 
 		const futuraPositionFeature = new atlas.data.Feature(new atlas.data.Point([7.7785893, 63.1104077]), {
-			name: "Nærmeste offentlige bomberom",
+			name: "Nærmeste offentlige tilfluktsrom",
 			description: "Futura, Industriveien 17, 6517 Kristiansund"
 		});
 
