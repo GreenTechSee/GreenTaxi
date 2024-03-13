@@ -66,3 +66,6 @@ DEMO: https://greentaxi.azurewebsites.net/
 <h2>Support</h2>
 <p>Har du spørsmål eller trenger hjelp? Vårt supportteam er her for å assistere deg. Kontakt oss på <a href="mailto: hege.kristin.sjavik.hande@kristiansund.kommune.no">hege.kristin.sjavik.hande@kristiansund.kommune.no</a> for assistanse.</p>
 
+<h2>Ukesansvarlig</h2>
+<p>Denne uken er det Hege som er ukesansvarlig.</p>
+
