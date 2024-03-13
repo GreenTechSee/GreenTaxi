@@ -13,7 +13,7 @@ DEMO: https://greentaxi.azurewebsites.net/
 <p>Hege er Head of UX i Team GreenTaxi, hun har også full kontroll på teamet gjennom rollen sin som teamlead, hun elsker Balsamico og hater ostepop</p>
 
 <h2>Ole Morten Didriksen</h2>
-<p>Ole Morten er Head of development i Team GreenTaxi, han elsker CSS og hater smånisser som folk har i hagen.</p>
+<p>Ole Morten er Head of development i Team GreenTaxi, han elsker CSS og hater smånisser som har folk i hagen.</p>
 
 <h2>Alida Hjelljord</h2>
 <p>Alida er Head of integrations i Team GreenTaxi, hun elsker gamle episoder av Jepardy på TV2 og hater klissete bokser når hun panter</p>
