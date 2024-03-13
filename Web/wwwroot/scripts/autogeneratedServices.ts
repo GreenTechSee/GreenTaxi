@@ -17,9 +17,13 @@ export class ActionsClient {
 
     constructor(baseUrl?: string, http?: { fetch(url: RequestInfo, init?: RequestInit): Promise<Response> }) {
         this.http = http ? http : window as any;
-        this.baseUrl = baseUrl ?? "https://localhost:5001";
+        this.baseUrl = baseUrl ?? "http://localhost:8080";
     }
 
+    /**
+     * Debug API:
+    Throw an error
+     */
     throwError(): Promise<FileResponse> {
         let url_ = this.baseUrl + "/Secure/Actions/ThrowError";
         url_ = url_.replace(/[?&]$/, "");
@@ -58,6 +62,11 @@ export class ActionsClient {
         return Promise.resolve<FileResponse>(null as any);
     }
 
+    /**
+     * Dev API:
+    Generates typescript fetch methods from controller classes
+     * @return Returns Ok result if method runs without error
+     */
     generateTsFromSwagger(): Promise<FileResponse> {
         let url_ = this.baseUrl + "/Secure/Actions/GenerateTsFromSwagger";
         url_ = url_.replace(/[?&]$/, "");
@@ -96,6 +105,11 @@ export class ActionsClient {
         return Promise.resolve<FileResponse>(null as any);
     }
 
+    /**
+     * Debug API:
+    Simulates admin module by setting danger level to normal
+     * @return Returns Ok result if method runs without error
+     */
     setStatusToNormal(): Promise<FileResponse> {
         let url_ = this.baseUrl + "/Secure/Actions/SetStatusToNormal";
         url_ = url_.replace(/[?&]$/, "");
@@ -134,6 +148,11 @@ export class ActionsClient {
         return Promise.resolve<FileResponse>(null as any);
     }
 
+    /**
+     * Debug API:
+    Simulates admin module by setting danger level to warning
+     * @return Returns Ok result if method runs without error
+     */
     setStatusToWarning(): Promise<FileResponse> {
         let url_ = this.baseUrl + "/Secure/Actions/SetStatusToWarning";
         url_ = url_.replace(/[?&]$/, "");
@@ -172,6 +191,11 @@ export class ActionsClient {
         return Promise.resolve<FileResponse>(null as any);
     }
 
+    /**
+     * Debug API:
+    Simulates admin module by setting danger level to danger
+     * @return Returns Ok result if method runs without error
+     */
     setStatusToDanger(): Promise<FileResponse> {
         let url_ = this.baseUrl + "/Secure/Actions/SetStatusToDanger";
         url_ = url_.replace(/[?&]$/, "");
@@ -218,7 +242,7 @@ export class GptClient {
 
     constructor(baseUrl?: string, http?: { fetch(url: RequestInfo, init?: RequestInit): Promise<Response> }) {
         this.http = http ? http : window as any;
-        this.baseUrl = baseUrl ?? "https://localhost:5001";
+        this.baseUrl = baseUrl ?? "http://localhost:8080";
     }
 
     generateResult(input: GptEntity): Promise<string> {
@@ -268,44 +292,13 @@ export class SecureApiClient {
 
     constructor(baseUrl?: string, http?: { fetch(url: RequestInfo, init?: RequestInit): Promise<Response> }) {
         this.http = http ? http : window as any;
-        this.baseUrl = baseUrl ?? "https://localhost:5001";
+        this.baseUrl = baseUrl ?? "http://localhost:8080";
     }
 
-    getLoggedInFnr(): Promise<string> {
-        let url_ = this.baseUrl + "/Secure/SecureApi/GetLoggedInFnr";
-        url_ = url_.replace(/[?&]$/, "");
-
-        let options_: RequestInit = {
-            method: "GET",
-            headers: {
-                "Accept": "application/json"
-            }
-        };
-
-        return this.http.fetch(url_, options_).then((_response: Response) => {
-            return this.processGetLoggedInFnr(_response);
-        });
-    }
-
-    protected processGetLoggedInFnr(response: Response): Promise<string> {
-        const status = response.status;
-        let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
-        if (status === 200) {
-            return response.text().then((_responseText) => {
-            let result200: any = null;
-            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-                result200 = resultData200 !== undefined ? resultData200 : <any>null;
-    
-            return result200;
-            });
-        } else if (status !== 200 && status !== 204) {
-            return response.text().then((_responseText) => {
-            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
-            });
-        }
-        return Promise.resolve<string>(null as any);
-    }
-
+    /**
+     * Adds a home to the logged in user
+     * @param numberOfInhabitants (optional) Number of people living in the home
+     */
     addHome(numberOfInhabitants: number | undefined): Promise<void> {
         let url_ = this.baseUrl + "/Secure/SecureApi/AddHome?";
         if (numberOfInhabitants === null)
@@ -340,6 +333,10 @@ export class SecureApiClient {
         return Promise.resolve<void>(null as any);
     }
 
+    /**
+     * Gets the home of the logged in user
+     * @return Home registered to current user
+     */
     getHome(): Promise<HomeEntity> {
         let url_ = this.baseUrl + "/Secure/SecureApi/GetHome";
         url_ = url_.replace(/[?&]$/, "");
@@ -374,6 +371,10 @@ export class SecureApiClient {
         return Promise.resolve<HomeEntity>(null as any);
     }
 
+    /**
+     * Adds an item to a home
+     * @param item ItemEntity to add
+     */
     addItem(item: ItemEntity): Promise<void> {
         let url_ = this.baseUrl + "/Secure/SecureApi/AddItem";
         url_ = url_.replace(/[?&]$/, "");
@@ -408,6 +409,10 @@ export class SecureApiClient {
         return Promise.resolve<void>(null as any);
     }
 
+    /**
+     * Removes item from home
+     * @param itemId (optional) Id of the item to remove
+     */
     removeItem(itemId: number | undefined): Promise<void> {
         let url_ = this.baseUrl + "/Secure/SecureApi/RemoveItem?";
         if (itemId === null)
@@ -442,6 +447,10 @@ export class SecureApiClient {
         return Promise.resolve<void>(null as any);
     }
 
+    /**
+     * Gets all itemTypes
+     * @return All itemTypes in DB
+     */
     getItemTypes(): Promise<ItemTypeEntity[]> {
         let url_ = this.baseUrl + "/Secure/SecureApi/GetItemTypes";
         url_ = url_.replace(/[?&]$/, "");
@@ -483,6 +492,11 @@ export class SecureApiClient {
         return Promise.resolve<ItemTypeEntity[]>(null as any);
     }
 
+    /**
+     * Get items in a home
+     * @param homeId (optional) Id of home to get for
+     * @return List of items
+     */
     getItems(homeId: number | undefined): Promise<ItemEntity[]> {
         let url_ = this.baseUrl + "/Secure/SecureApi/GetItems?";
         if (homeId === null)
@@ -528,6 +542,9 @@ export class SecureApiClient {
         return Promise.resolve<ItemEntity[]>(null as any);
     }
 
+    /**
+     * Gets the status of the application
+     */
     getStatus(): Promise<Status> {
         let url_ = this.baseUrl + "/Secure/SecureApi/GetStatus";
         url_ = url_.replace(/[?&]$/, "");
@@ -562,6 +579,9 @@ export class SecureApiClient {
         return Promise.resolve<Status>(null as any);
     }
 
+    /**
+     * Gets the AzureMapsKey
+     */
     getAzureMapsKey(): Promise<string> {
         let url_ = this.baseUrl + "/Secure/SecureApi/GetAzureMapsKey";
         url_ = url_.replace(/[?&]$/, "");
@@ -597,6 +617,10 @@ export class SecureApiClient {
         return Promise.resolve<string>(null as any);
     }
 
+    /**
+     * Checks if user is the user with easter egg profile
+     * @return True if user has correct fnr, else false
+     */
     isEasterEggActivated(): Promise<boolean> {
         let url_ = this.baseUrl + "/Secure/SecureApi/IsEasterEggActivated";
         url_ = url_.replace(/[?&]$/, "");
@@ -630,58 +654,6 @@ export class SecureApiClient {
             });
         }
         return Promise.resolve<boolean>(null as any);
-    }
-}
-
-export class WeatherForecastClient {
-    private http: { fetch(url: RequestInfo, init?: RequestInit): Promise<Response> };
-    private baseUrl: string;
-    protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
-
-    constructor(baseUrl?: string, http?: { fetch(url: RequestInfo, init?: RequestInit): Promise<Response> }) {
-        this.http = http ? http : window as any;
-        this.baseUrl = baseUrl ?? "https://localhost:5001";
-    }
-
-    get(): Promise<WeatherForecast[]> {
-        let url_ = this.baseUrl + "/WeatherForecast";
-        url_ = url_.replace(/[?&]$/, "");
-
-        let options_: RequestInit = {
-            method: "GET",
-            headers: {
-                "Accept": "application/json"
-            }
-        };
-
-        return this.http.fetch(url_, options_).then((_response: Response) => {
-            return this.processGet(_response);
-        });
-    }
-
-    protected processGet(response: Response): Promise<WeatherForecast[]> {
-        const status = response.status;
-        let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
-        if (status === 200) {
-            return response.text().then((_responseText) => {
-            let result200: any = null;
-            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            if (Array.isArray(resultData200)) {
-                result200 = [] as any;
-                for (let item of resultData200)
-                    result200!.push(WeatherForecast.fromJS(item));
-            }
-            else {
-                result200 = <any>null;
-            }
-            return result200;
-            });
-        } else if (status !== 200 && status !== 204) {
-            return response.text().then((_responseText) => {
-            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
-            });
-        }
-        return Promise.resolve<WeatherForecast[]>(null as any);
     }
 }
 
@@ -840,7 +812,7 @@ export class ItemEntity extends DatabaseTable implements IItemEntity {
     id?: number;
     itemTypeId?: number;
     homeId?: number;
-    sellByDate?: Date;
+    sellByDate?: Date | undefined;
     itemType?: ItemTypeEntity | undefined;
 
     constructor(data?: IItemEntity) {
@@ -887,7 +859,7 @@ export interface IItemEntity extends IDatabaseTable {
     id?: number;
     itemTypeId?: number;
     homeId?: number;
-    sellByDate?: Date;
+    sellByDate?: Date | undefined;
     itemType?: ItemTypeEntity | undefined;
 }
 
@@ -995,60 +967,6 @@ export interface IStatus extends IDatabaseTable {
     isActive?: boolean;
     name?: string;
     description?: string | undefined;
-}
-
-export class WeatherForecast implements IWeatherForecast {
-    date?: Date;
-    temperatureC?: number;
-    temperatureF?: number;
-    summary?: string | undefined;
-
-    constructor(data?: IWeatherForecast) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            this.date = _data["date"] ? new Date(_data["date"].toString()) : <any>undefined;
-            this.temperatureC = _data["temperatureC"];
-            this.temperatureF = _data["temperatureF"];
-            this.summary = _data["summary"];
-        }
-    }
-
-    static fromJS(data: any): WeatherForecast {
-        data = typeof data === 'object' ? data : {};
-        let result = new WeatherForecast();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["date"] = this.date ? formatDate(this.date) : <any>undefined;
-        data["temperatureC"] = this.temperatureC;
-        data["temperatureF"] = this.temperatureF;
-        data["summary"] = this.summary;
-        return data;
-    }
-}
-
-export interface IWeatherForecast {
-    date?: Date;
-    temperatureC?: number;
-    temperatureF?: number;
-    summary?: string | undefined;
-}
-
-function formatDate(d: Date) {
-    return d.getFullYear() + '-' + 
-        (d.getMonth() < 9 ? ('0' + (d.getMonth()+1)) : (d.getMonth()+1)) + '-' +
-        (d.getDate() < 10 ? ('0' + d.getDate()) : d.getDate());
 }
 
 export interface FileResponse {
