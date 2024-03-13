@@ -82,4 +82,9 @@ public class SecureApiController : ControllerBase
 	{
 		return configuration["Secrets:AzureMapsKey"] ?? string.Empty;
 	}
+
+	public async Task<bool> IsEasterEggActivated()
+	{
+		return User.FindFirst(AppClaims.EasterEgg)?.Value == "true";
+	}
 }

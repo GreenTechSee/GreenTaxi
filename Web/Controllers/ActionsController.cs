@@ -76,6 +76,5 @@ namespace Web.Controllers
 			await statusRepository.SetActiveStatus(connection, 3);
 			return Content("OK", "text/plain");
 		}
-
 	}
 }

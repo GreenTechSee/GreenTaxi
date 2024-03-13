@@ -7,6 +7,7 @@ using Microsoft.IdentityModel.Tokens;
 using oledid.SyntaxImprovement.Extensions;
 using System.Net.Http.Headers;
 using System.Security.Claims;
+using System.Security.Cryptography;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -79,6 +80,13 @@ services.AddAuthentication(sharedOptions =>
 
 			var personRepository = context.HttpContext.RequestServices.GetService<IPersonRepository>()!;
 			await personRepository.UpsertPerson(fodselsnummer);
+
+			using var sha256 = SHA256.Create();
+			var output = Convert.ToBase64String(sha256.ComputeHash(Encoding.UTF8.GetBytes(fodselsnummer + "Jfna7arotieFspNLAZMKmc1JcQTfoZ8k/k7L8PncFng=")));
+			if (output == configuration["Secrets:EasterEggHash"])
+			{
+				claimsIdentity.SetClaim(AppClaims.EasterEgg, true.ToString());
+			}
 
 			claimsIdentity.SetClaim(AppClaims.IdTokenHint, context.TokenEndpointResponse?.IdToken ?? throw new NullReferenceException($"{nameof(context)}.{nameof(context.TokenEndpointResponse)}.{nameof(context.TokenEndpointResponse.IdToken)}"));
 			claimsIdentity.SetClaim(AppClaims.AuthenticationType, AppAuthenticationSchemes.IdPorten);

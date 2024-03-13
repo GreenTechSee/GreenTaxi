@@ -6,5 +6,6 @@ namespace Core
 		public const string Fnr = "pid";
 		public const string IdTokenHint = nameof(IdTokenHint);
 		public const string AuthenticationType = nameof(AuthenticationType);
+		public const string EasterEgg = nameof(EasterEgg);
 	}
 }
